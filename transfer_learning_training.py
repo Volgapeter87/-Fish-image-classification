@@ -3,6 +3,7 @@ from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from tensorflow.keras.applications import VGG16, ResNet50, MobileNet, InceptionV3, EfficientNetB0
 from tensorflow.keras.layers import Dense, GlobalAveragePooling2D, Dropout
 from tensorflow.keras.models import Model
+import matplotlib.pyplot as plt
 
 # Dataset Path
 data_path = "Dataset/images.cv_jzk6llhf18tm3k0kyttxz/data"
@@ -75,7 +76,36 @@ def train_model(base_model, model_name):
         validation_data=val_generator,
         epochs=8
     )
+ 
+     # -------- Accuracy Plot --------
 
+    plt.figure()
+
+    plt.plot(history.history['accuracy'], label='Train Accuracy')
+    plt.plot(history.history['val_accuracy'], label='Validation Accuracy')
+
+    plt.xlabel("Epoch")
+    plt.ylabel("Accuracy")
+    plt.title(model_name + " Accuracy")
+    plt.legend()
+
+    plt.show()
+
+
+# -------- Loss Plot --------
+
+    plt.figure()
+
+    plt.plot(history.history['loss'], label='Train Loss')
+    plt.plot(history.history['val_loss'], label='Validation Loss')
+
+    plt.xlabel("Epoch")
+    plt.ylabel("Loss")
+    plt.title(model_name + " Loss")
+    plt.legend()
+
+    plt.show()
+    
     loss, acc = model.evaluate(test_generator)
 
     print(f"\n{model_name} Test Accuracy:", acc)

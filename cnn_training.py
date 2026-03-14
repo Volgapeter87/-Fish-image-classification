@@ -103,3 +103,15 @@ plt.legend()
 plt.title("CNN Training Accuracy")
 
 plt.show()
+
+# Plot Loss
+
+plt.plot(history.history['loss'], label='train loss')
+plt.plot(history.history['val_loss'], label='val loss')
+
+plt.xlabel("Epoch")
+plt.ylabel("Loss")
+plt.legend()
+plt.title("CNN Training Loss")
+
+plt.show()
